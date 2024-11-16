@@ -1,0 +1,251 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('content'); ?>
+
+<?php 
+ /*
+ ========== SNIPPETS ==========
+ isNotEmpty
+ gioithieu
+ newsHot
+ */
+ ?>
+<?php if($criteria->isNotEmpty()): ?>
+ <div class="criteria-wrapper" style="overflow: hidden;" >
+ <div class="wrap-content">
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:1|margin:10,screen:425|items:1|margin:10,screen:575|items:2|margin:10,screen:767|items:2|margin:10,screen:991|items:2|margin:20,screen:1199|items:4|margin:20"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1" data-touchdrag="1"
+ data-smartspeed="800" data-autoplayspeed="800" data-autoplaytimeout="5000" data-dots="1" data-animations=""
+ data-nav="0" data-navcontainer="">
+ <?php $__currentLoopData = $criteria; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php $time = 0; $time += $k / 25 * 10;  ?>
+ <div class="criteria-item wow animate__fadeInUp" 
+ data-wow-duration="<?php echo \htmlentities($time.'s'??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <div class="criteria-pic rotateY_img">
+ <img class="scale-img" 
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/59x59x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('news','',$v->photo,'')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </div>
+ <div class="criteria-info">
+ <p class="criteria-name"> <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?> </p>
+ <p class="criteria-desc text-split"> <?php echo \htmlentities($v["desc$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?> </p>
+ </div>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ </div>
+<?php endif; ?>
+
+<?php if($productListHot->isNotEmpty()): ?>
+ <div class="productListHot-wrapper" style="overflow:hidden;">
+ <?php $__currentLoopData = $productListHot; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $klist => $vlist): $loop = $this->incrementLoopIndices();  ?>
+ <div class="productListHot-item">
+ <div class="wrap-content">
+ <div class="productListHot-heading">
+ <div class="productListHot-wrap">
+ <h3 class="productListHot-list text-split">
+ <?php echo \htmlentities($vlist["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </h3>   
+ 
+ <?php if($vlist->getCategoryCats()->get()->isNotEmpty()): ?>
+ <div class="productListHot-cats">
+ <?php $__currentLoopData = $vlist->getCategoryCats()->get(); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $vcat): $loop = $this->incrementLoopIndices();  ?>
+ <div>
+ <p class="productListHot-click"
+ data-url="<?php echo \htmlentities(url('load-product')??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-idl="<?php echo \htmlentities($vlist['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ data-idc="<?php echo \htmlentities($vcat['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ >
+ <?php echo \htmlentities($vcat["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </p>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <a href="<?php echo \htmlentities($vcat["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>" class="cats-btn hover_xemthem">Xem tất cả</a>
+ <?php endif; ?>
+ </div>
+ </div>
+ 
+ <?php if($vlist->getCategoryItems()->get()->isNotEmpty()): ?>
+ <div class="productListHot-brands">
+ <div class="productListHot-wrap">
+ <?php $__currentLoopData = $vlist->getCategoryItems()->get(); $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $vitem): $loop = $this->incrementLoopIndices();  ?>
+ <?php $time = 0; $time += $k / 25 * 10;  ?>
+ <a  href="<?php echo \htmlentities($vitem["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>"  class="productListHot-brand wow animate__fadeInUp" 
+ data-wow-duration="<?php echo \htmlentities($time.'s'??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <img class="scale-img" 
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/105x50x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" 
+ src="<?php echo \htmlentities(assets_photo('product','105x50x1',$vitem->photo,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($vitem->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+
+ <?php /* <?php if($producBrandHot->isNotEmpty()): ?>
+ <div class="productListHot-brands">
+ <div class="productListHot-wrap">
+ <?php $__currentLoopData = $producBrandHot; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php $time = 0; $time += $k / 25 * 10;  ?>
+ <a  href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>"  class="productListHot-brand wow animate__fadeInUp" 
+ data-wow-duration="<?php echo \htmlentities($time.'s'??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>     
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>*/ ?>
+ 
+ <?php /* load-product */ ?>
+ <div class="load-product load-product-<?php echo \htmlentities($vlist['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"></div>
+ </div>
+ </div>
+ <?php if(!empty($vlist->banner)): ?>
+ <a href="<?php echo \htmlentities($vlist["slugvi"]??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ class="productListHot-banner wow animate__fadeInUp" 
+ data-wow-duration="1.4s">
+ <img class="scale-img w-100 h-100" 
+ onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/1366x200x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('product','1366x200x1',$vlist->banner,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($vlist["namevi"]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ </a>
+ <?php endif; ?>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+<?php endif; ?>
+
+<?php if($partner->isNotEmpty()): ?>
+ <div class="partner-wrapper" style="overflow: hidden;">
+ <div class="wrap-content wow animate__fadeInUp" data-wow-duration="1.4s" >
+ <div class="partner-owl" >
+ <div class="owl-page owl-carousel owl-theme"
+ data-items="screen:0|items:2|margin:10,screen:425|items:3|margin:10,screen:575|items:4|margin:10,screen:767|items:5|margin:10,screen:991|items:6|margin:20,screen:1199|items:11|margin:10"
+ data-rewind="1" data-autoplay="1" data-loop="0" data-lazyload="0" data-mousedrag="1" data-touchdrag="1"
+ data-smartspeed="800" data-autoplayspeed="800" data-autoplaytimeout="5000" data-dots="0" data-animations=""
+ data-nav="0" 
+ data-navtext = "<img src='assets/images/prev.png'> | <img src='assets/images/next.png'>"
+ data-navcontainer=".control-partner">
+ <?php $__currentLoopData = $partner; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $k => $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php $time = 0; $time += $k/2 +  0.5;   ?>
+ <a 
+ class="partner-pic scale-img hover_sang3 wow animate__fadeInUp" data-wow-duration="<?php echo \htmlentities($time.'S'??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>" >
+ <img class="w-100" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/110x60x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('photo','110x60x1',$v->photo,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>"> 
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ <div class="control-partner control-owl transition"></div>
+ </div>
+ </div>
+ </div>
+<?php endif; ?>
+
+<div class="baiviet-wrapper">
+ <div class="wrap-content">
+ <div class="baiviet-grid">
+ <?php if($cauhoithuonggap->isNotEmpty()): ?>
+ <div class="baiviet-box wow animate__fadeInLeft" 
+ data-wow-duration="1.4s">
+ <p class="baiviet-title">
+ <img src="assets/images/icon1.png" alt="icon1.png">
+ <span>Hướng dẫn - Câu hỏi thường gặp</span>                    
+ </p>
+ <div class="baiviet-slick">
+ <?php $__currentLoopData = $cauhoithuonggap; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="baiviet-item">
+ <a href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>" class="baiviet-pic scale-img">
+ <img class="w-100" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/180x100x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('news','180x100x1',$v->photo,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>"> 
+ </a>
+ <h3 class="baiviet-name">
+ <a class="text-split" href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+
+ <?php if($tailieukythuat->isNotEmpty()): ?>
+ <div class="baiviet-box wow animate__fadeInUp" 
+ data-wow-duration="1.4s">
+ <p class="baiviet-title">
+ <img src="assets/images/icon2.png" alt="icon2.png">
+ <span>TÀI LIỆU KỸ THUẬT</span>                    
+ </p>
+ <div class="baiviet-slick">
+ <?php $__currentLoopData = $tailieukythuat; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="baiviet-item">
+ <a href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>" class="baiviet-pic scale-img">
+ <img class="w-100" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/180x100x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('news','180x100x1',$v->photo,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>"> 
+ </a>
+ <h3 class="baiviet-name">
+ <a class="text-split" href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+
+ <?php if($banggiasanpham->isNotEmpty()): ?>
+ <div class="baiviet-box wow animate__bounceInRight" 
+ data-wow-duration="1.4s">
+ <p class="baiviet-title">
+ <img src="assets/images/icon3.png" alt="icon3.png">
+ <span>BẢNG GIÁ SẢN PHẨM</span>                    
+ </p>
+ <div class="baiviet-slick">
+ <?php $__currentLoopData = $banggiasanpham; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <div class="baiviet-item">
+ <a href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>" class="baiviet-pic scale-img">
+ <img class="w-100" onerror="this.src='<?php echo \htmlentities(thumbs('thumbs/180x100x1/assets/images/noimage.png')??'', ENT_QUOTES, 'UTF-8', false); ?>';" src="<?php echo \htmlentities(assets_photo('news','180x100x1',$v->photo,'thumbs')??'', ENT_QUOTES, 'UTF-8', false); ?>" alt="<?php echo \htmlentities($v->namevi??'', ENT_QUOTES, 'UTF-8', false); ?>"> 
+ </a>
+ <h3 class="baiviet-name">
+ <a class="text-split" href="<?php echo \htmlentities($v["slug$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>">
+ <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </h3>
+ </div>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ </div>
+ <?php endif; ?>
+ </div>
+ </div>
+</div>
+
+
+<?php if($tagTuKhoa->isNotEmpty()): ?>
+ <div class="tagTuKhoa-wrapper" style="overflow:hidden;">
+ <div class="wrap-content">
+ <div class="tagTuKhoa-items">
+ <?php $__currentLoopData = $tagTuKhoa; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $v): $loop = $this->incrementLoopIndices();  ?>
+ <?php $time = 0; $time += $k / 25 * 10;  ?>
+ <a href="<?php echo \htmlentities($v['link']??'', ENT_QUOTES, 'UTF-8', false); ?>" 
+ class="tagTuKhoa-name wow animate__fadeInRight"
+ data-wow-duration="1.4s"
+ >
+ <img src="assets/images/icon-tag.png" alt="icon-tag">
+ <?php echo \htmlentities($v["name$lang"]??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </a>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </div>
+ 
+ </div>
+ </div>
+<?php endif; ?>
+
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layout'); } ?>
